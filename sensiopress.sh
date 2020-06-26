@@ -33,11 +33,11 @@ function sensiopal()
     if [ $(basename $(pwd)) != SENSIOPAL ]
         then
         echo "$(tput setaf 6)"
-        echo "   _________  ______________  ___  ___  ____________"
-        echo "  / __/ __/ |/ / __/  _/ __ \/ _ \/ _ \/ __/ __/ __/"
-        echo " _\ \/ _//    /\ \_/ // /_/ / ___/ , _/ _/_\ \_\ \ "  
-        echo "/___/___/_/|_/___/___/\____/_/  /_/|_/___/___/___/"
-        echo "----------------- WORDPRESS PROJECT MANAGER v.$SENSIOPAL_SCRIPT_VERSION"
+        echo "   _________  ______________  ___  ____ __"
+        echo "  / __/ __/ |/ / __/  _/ __ \/ _ \/ _  / /"
+        echo " _\ \/ _//    /\ \_/ // /_/ / ___/ _  / / "
+        echo "/___/___/_/|_/___/___/\____/_/  /_//_/___/"
+        echo "----------------- DRUPAL PROJECT MANAGER v.$SENSIOPAL_SCRIPT_VERSION"
         echo "$(tput setaf 7)"
     fi
 
@@ -229,9 +229,9 @@ sensiopal_conf()
     unset GITHUB_REPO
 
     unset LOCAL_DOMAIN
-    unset LOCAL_WP_USER
-    unset LOCAL_WP_PASS
-    unset LOCAL_WP_DB_PREFIX
+    unset LOCAL_DP_USER
+    unset LOCAL_DP_PASS
+    unset LOCAL_DP_DB_PREFIX
     unset LOCAL_BRANCH
 
     unset STAGING_DOMAIN
@@ -244,8 +244,8 @@ sensiopal_conf()
     unset STAGING_DB_USER
     unset STAGING_DB_PASS
     unset STAGING_DB_HOST
-    unset STAGING_WP_USER
-    unset STAGING_WP_PASS
+    unset STAGING_DP_USER
+    unset STAGING_DP_PASS
     unset STAGING_BRANCH
 
     unset PREPRODUCTION_DOMAIN
@@ -258,8 +258,8 @@ sensiopal_conf()
     unset PREPRODUCTION_DB_USER
     unset PREPRODUCTION_DB_PASS
     unset PREPRODUCTION_DB_HOST
-    unset PREPRODUCTION_WP_USER
-    unset PREPRODUCTION_WP_PASS
+    unset PREPRODUCTION_DP_USER
+    unset PREPRODUCTION_DP_PASS
     unset PREPRODUCTION_BRANCH
 
     unset PRODUCTION_DOMAIN
@@ -272,13 +272,13 @@ sensiopal_conf()
     unset PRODUCTION_DB_USER
     unset PRODUCTION_DB_PASS
     unset PRODUCTION_DB_HOST
-    unset PRODUCTION_WP_USER
-    unset PRODUCTION_WP_PASS
+    unset PRODUCTION_DP_USER
+    unset PRODUCTION_DP_PASS
     unset PRODUCTION_BRANCH
 
     unset prepross_starting
 
-    WP_PLUGINS="n"
+    DP_PLUGINS="n"
 
     DOCKER_MACHINE_DRIVER="virtualbox"
     SENSIOPAL_MACHINE="sensiopal"
@@ -299,75 +299,6 @@ sensiopal_conf()
 
     mkdir -p ~/SENSIOPAL
 
-}
-
-##
-## Conf
-##
-sensiopal_check_linotype_version()
-{
-
-    if [ -e $CONNECTED ]; 
-        then
-            echo "$(tput setaf 1)You are offline, we can't check if LINOTYPE is up to date. Your project can not run as expected.$(tput setaf 7)"
-        else        
-            echo -n "$(tput setaf 6)SENSIOPAL::CHECK:LINOTYPE...$(tput setaf 7)"
-
-            LINOTYPE_DIR=~/SENSIOPAL/$PROJECT_ID/public/wp-content/plugins
-            
-            SENSIOPAL_LINOTYPE_VERSION=0
-            
-            if [ -e $LINOTYPE_DIR/linotype/version ] 
-                then
-                    SENSIOPAL_LINOTYPE_VERSION=$(cat $LINOTYPE_DIR/linotype/version)
-
-            fi
-
-            SENSIOPAL_LINOTYPE_VERSION_LATEST="$(curl -H "Authorization: token $GITHUB_TOKEN" -L curl --silent "https://api.github.com/repos/yannickarmspach/LINOTYPE/releases/latest" | sed -n 's/.*"tag_name": "\(.*\)",/\1/p')"
-
-            if [ "$SENSIOPAL_SCRIPT_VERSION_LATEST" != "" ]
-                then
-                    if [ $SENSIOPAL_LINOTYPE_VERSION == $SENSIOPAL_LINOTYPE_VERSION_LATEST ]
-                        then
-                            echo -n " $(tput setaf 2)OK v.$SENSIOPAL_LINOTYPE_VERSION$(tput setaf 7)"
-                            echo
-                        else
-                            echo -n " $(tput setaf 1)KO require v.$SENSIOPAL_LINOTYPE_VERSION_LATEST$(tput setaf 7)"
-                            echo
-                            if [ $SENSIOPAL_LINOTYPE_VERSION == 0 ]
-                                then
-                                    SENSIOPAL_LINOTYPE_VERSION_UPDATE="y"
-                                else
-                                    read -p "$(tput setaf 2)Update require.$(tput setaf 7) Install v.$SENSIOPAL_LINOTYPE_VERSION_LATEST ? (y/n): " SENSIOPAL_LINOTYPE_VERSION_UPDATE
-                            fi
-                            if [ $SENSIOPAL_LINOTYPE_VERSION_UPDATE == "y" ]
-                                then
-                                    echo "$(tput setaf 6)Installing v.$SENSIOPAL_LINOTYPE_VERSION_LATEST...$(tput setaf 7)"
-                                    rm -R $LINOTYPE_DIR/linotype
-                                    mkdir $LINOTYPE_DIR/linotype
-                                    mkdir $LINOTYPE_DIR/linotype/.download
-                                    curl -H "Authorization: token $GITHUB_TOKEN" -L https://api.github.com/repos/yannickarmspach/LINOTYPE/tarball -o $LINOTYPE_DIR/linotype/.download/update.tar.gz
-                                    tar -xvf $LINOTYPE_DIR/linotype/.download/update.tar.gz -C $LINOTYPE_DIR/linotype/.download
-                                    rm $LINOTYPE_DIR/linotype/.download/update.tar.gz
-                                    mv $LINOTYPE_DIR/linotype/.download/*/* $LINOTYPE_DIR/linotype
-                                    rm -R $LINOTYPE_DIR/linotype/.download
-                                    echo "$SENSIOPAL_LINOTYPE_VERSION_LATEST" > $LINOTYPE_DIR/linotype/version
-                                    sleep .5
-                                    echo "$(tput setaf 2)SENSIOPAL is updated to v.$SENSIOPAL_LINOTYPE_VERSION_LATEST$(tput setaf 7)"
-                                    sleep .5
-                                    echo "$(tput setaf 2)Open new terminal to reload LINOTYPE$(tput setaf 7)"
-                                else
-                                    echo "$(tput setaf 1)SENSIOPAL not updated to v.$SENSIOPAL_LINOTYPE_VERSION_LATEST$(tput setaf 7)"
-                            fi
-                    fi
-                else
-                    echo "$(tput setaf 1)ERROR$(tput setaf 7)"
-                    echo "$(tput setaf 1)SENSIOPAL cannot connect to github to check the latest version of the script. Try again later.$(tput setaf 7)"
-
-            fi
-        
-    fi
-    
 }
 
 ##
@@ -441,10 +372,10 @@ sensiopal_help()
     echo
     echo "--help"
     echo
-    echo "  $ sensiopal new                   - Create new wordpress project"
-    echo "  $ sensiopal up                    - Start wordpress project locally"
-    echo "  $ sensiopal down                  - Stop wordpress project locally"
-    echo "  $ sensiopal delete                - Create a new wordpress project"
+    echo "  $ sensiopal new                   - Create new drupal project"
+    echo "  $ sensiopal up                    - Start drupal project locally"
+    echo "  $ sensiopal down                  - Stop drupal project locally"
+    echo "  $ sensiopal delete                - Create a new drupal project"
     echo "  $ sensiopal deploy staging        - Deploy current project to staging environement"
     echo "  $ sensiopal deploy preproduction  - Deploy current project to preproduction environement"
     echo "  $ sensiopal deploy production     - Deploy current project to production environement"
@@ -580,31 +511,31 @@ function sensiopal_config()
             echo "$(tput setaf 2)set$(tput setaf 7) Local Domain: $LOCAL_DOMAIN"
     fi
 
-    read -p "Wordpress Username (default: admin): " LOCAL_WP_USER
-    if [ -z $LOCAL_WP_USER ] 
+    read -p "Drupal Username (default: admin): " LOCAL_DP_USER
+    if [ -z $LOCAL_DP_USER ]
         then
-            LOCAL_WP_USER="admin"
-            echo "$(tput setaf 2)set$(tput setaf 7) Wordpress Username: $LOCAL_WP_USER"
+            LOCAL_DP_USER="admin"
+            echo "$(tput setaf 2)set$(tput setaf 7) Drupal Username: $LOCAL_DP_USER"
     fi
 
-    read -p "Wordpress Password (default: admin): " LOCAL_WP_PASS
-    if [ -z $LOCAL_WP_PASS ] 
+    read -p "Drupal Password (default: admin): " LOCAL_DP_PASS
+    if [ -z $LOCAL_DP_PASS ]
         then
-            LOCAL_WP_PASS="admin"
-            echo "$(tput setaf 2)set$(tput setaf 7) Wordpress Password: $LOCAL_WP_PASS"
+            LOCAL_DP_PASS="admin"
+            echo "$(tput setaf 2)set$(tput setaf 7) Drupal Password: $LOCAL_DP_PASS"
     fi
 
-    read -p "Wordpress db prefix (default: wp_): " LOCAL_WP_DB_PREFIX
-    if [ -z $LOCAL_WP_DB_PREFIX ] 
+    read -p "Drupal db prefix (default: wp_): " LOCAL_DP_DB_PREFIX
+    if [ -z $LOCAL_DP_DB_PREFIX ]
         then
-            LOCAL_WP_DB_PREFIX="wp_"
-            echo "$(tput setaf 2)set$(tput setaf 7) Wordpress db prefix: $LOCAL_WP_DB_PREFIX"
+            LOCAL_DP_DB_PREFIX="wp_"
+            echo "$(tput setaf 2)set$(tput setaf 7) Drupal db prefix: $LOCAL_DP_DB_PREFIX"
     fi
 
-    read -p "Install default Wordpress Plugins (y/n): " WP_PLUGINS
-    if [ -z $WP_PLUGINS ] 
+    read -p "Install default Drupal Plugins (y/n): " DP_PLUGINS
+    if [ -z $DP_PLUGINS ]
         then
-            WP_PLUGINS="n"
+            DP_PLUGINS="n"
     fi
 
     read -p "Git Branch (default: origin/master): " LOCAL_BRANCH
@@ -631,7 +562,7 @@ function sensiopal_config()
     read -p "Staging DB Pass: " STAGING_DB_PASS
     read -p "Staging DB Host: " STAGING_DB_HOST
 
-    read -p "Staging Wordpress Password: " STAGING_WP_PASS
+    read -p "Staging Drupal Password: " STAGING_DP_PASS
 
     read -p "Staging Git Branch (default: origin/staging): " STAGING_BRANCH
     if [ -z $STAGING_BRANCH ] 
@@ -657,7 +588,7 @@ function sensiopal_config()
     read -p "Preproduction DB Pass: " PREPRODUCTION_DB_PASS
     read -p "Preproduction DB Host: " PREPRODUCTION_DB_HOST
 
-    read -p "Preproduction Wordpress Password: " PREPRODUCTION_WP_PASS
+    read -p "Preproduction Drupal Password: " PREPRODUCTION_DP_PASS
 
     read -p "Preproduction Git Branch (default: origin/preproduction): " PREPRODUCTION_BRANCH
     if [ -z $PREPRODUCTION_BRANCH ] 
@@ -683,7 +614,7 @@ function sensiopal_config()
     read -p "Production DB Pass: " PRODUCTION_DB_PASS
     read -p "Production DB Host: " PRODUCTION_DB_HOST
 
-    read -p "Production Wordpress Password: " PRODUCTION_WP_PASS
+    read -p "Production Drupal Password: " PRODUCTION_DP_PASS
 
     read -p "Production Git Branch (default: origin/production): " PRODUCTION_BRANCH
     if [ -z $PRODUCTION_BRANCH ] 
@@ -702,11 +633,11 @@ function sensiopal_build_chmod()
     
     echo "$(tput setaf 6)SENSIOPAL::BUILD - Set Rights$(tput setaf 7)"
 
-    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chown -R www-data:www-data /var/www/html/wp-content/plugins/linotype" $shout
-    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chmod -R 777 /var/www/html/wp-content/plugins/linotype" $shout
-    
-    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chown -R www-data:www-data /var/www/html/wp-content/linotype" $shout
-    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chmod -R 777 /var/www/html/wp-content/linotype" $shout
+#    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chown -R www-data:www-data /var/www/html/wp-content/plugins/linotype" $shout
+#    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chmod -R 777 /var/www/html/wp-content/plugins/linotype" $shout
+
+#    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chown -R www-data:www-data /var/www/html/wp-content/linotype" $shout
+#    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "chmod -R 777 /var/www/html/wp-content/linotype" $shout
 
 }
 
@@ -742,7 +673,7 @@ function sensiopal_ready()
         then
             echo "LOCAL:" 
             echo "$(tput setaf 3) front -> $(tput setaf 2)https://$LOCAL_DOMAIN$(tput setaf 7)"
-            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$LOCAL_DOMAIN/wp-admin$(tput setaf 7)" 
+            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$LOCAL_DOMAIN/admin$(tput setaf 7)"
         else
             echo "LOCAL:"
             echo "$(tput setaf 1) null$(tput setaf 7)"
@@ -751,7 +682,7 @@ function sensiopal_ready()
         then
             echo "STAGING:" 
             echo "$(tput setaf 3) front -> $(tput setaf 2)https://$STAGING_DOMAIN$(tput setaf 7)"
-            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$STAGING_DOMAIN/wp-admin$(tput setaf 7)"
+            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$STAGING_DOMAIN/admin$(tput setaf 7)"
         else
             echo "STAGING:"
             echo "$(tput setaf 1) null$(tput setaf 7)"
@@ -760,7 +691,7 @@ function sensiopal_ready()
         then
             echo "PREPRODUCTION:" 
             echo "$(tput setaf 3) front -> $(tput setaf 2)https://$PREPRODUCTION_DOMAIN$(tput setaf 7)"
-            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$PREPRODUCTION_DOMAIN/wp-admin$(tput setaf 7)"
+            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$PREPRODUCTION_DOMAIN/admin$(tput setaf 7)"
         else
             echo "PREPRODUCTION:"
             echo "$(tput setaf 1) null$(tput setaf 7)"
@@ -769,7 +700,7 @@ function sensiopal_ready()
         then
             echo "PRODUCTION:" 
             echo "$(tput setaf 3) front -> $(tput setaf 2)https://$PRODUCTION_DOMAIN$(tput setaf 7)"
-            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$PRODUCTION_DOMAIN/wp-admin$(tput setaf 7)"
+            echo "$(tput setaf 3) admin -> $(tput setaf 2)https://$PRODUCTION_DOMAIN/admin$(tput setaf 7)"
         else
             echo "PRODUCTION:"
             echo "$(tput setaf 1) null$(tput setaf 7)"
@@ -985,11 +916,9 @@ function sensiopal_create()
     sensiopal_create_step__deployer
     sensiopal_create_step__deployer_sync
 
-    sensiopal_create_step__wp_config
+    sensiopal_create_step__dp_config
 
     sensiopal_up_docker
-
-    sensiopal_check_linotype_version
 
     sensiopal_build
 
@@ -1031,12 +960,10 @@ function sensiopal_init()
     sensiopal_create_step__deployer
     sensiopal_create_step__deployer_sync
 
-    sensiopal_create_step__wp_config
+    sensiopal_create_step__dp_config
 
     sensiopal_up_docker
     
-    sensiopal_check_linotype_version
-
     sensiopal_ready
 
 }
@@ -1068,7 +995,6 @@ function sensiopal_run()
     if [ $PROJECT_ID ] && [ -e local/config.yml ] 
         then
             
-            sensiopal_check_linotype_version
 
             if [ -z "$SENSIOPAL_VERSION" ] || [ $SENSIOPAL_VERSION != $SENSIOPAL_SCRIPT_VERSION ]
                 then
@@ -1162,29 +1088,27 @@ function sensiopal_build()
 
     if [ $PROJECT_ID ] 
         then
-            echo "$(tput setaf 6)SENSIOPAL::BUILD - Wordpress core$(tput setaf 7)"
+            echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal core$(tput setaf 7)"
 
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root core download --locale=fr_FR" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root config create --dbhost=db_$PROJECT_ID:3306 --dbcharset=utf8mb4 --dbcollate=utf8mb4_unicode_ci --skip-check --dbname=db_$PROJECT_ID --dbprefix=$LOCAL_WP_DB_PREFIX --dbuser=root --dbpass=root --locale=fr_FR --force" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root core install --admin_user=$LOCAL_WP_USER --admin_password=$LOCAL_WP_PASS --admin_email=$DEV_EMAIL --url=https://$LOCAL_DOMAIN --title=$PROJECT_ID --skip-email" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root option update home 'https://$LOCAL_DOMAIN/'" $shout
-            
-            rm public/wp-config-sample.php $shout
-            rm public/license.txt $shout
-            rm public/readme.html $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer create-project drupal-composer/drupal-project:8.x-dev --prefer-dist --no-progress --no-interaction" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal site:install  standard --langcode=fr --db-type=mariadb --db-host=db_$PROJECT_ID --db-port=3306 --db-name=db_$PROJECT_ID --db-prefix=$LOCAL_DP_DB_PREFIX --db-user=root --db-pass=root --account-name=$LOCAL_DP_USER --account-pass=$LOCAL_DP_PASS --site-mail=$DEV_EMAIL --url=https://$LOCAL_DOMAIN --site-name=$PROJECT_ID --no-interaction --force" $shout
 
-            rm -rf public/wp-content/plugins/akismet $shout
-            rm public/wp-content/plugins/hello.php $shout
-
-            rm -rf public/wp-content/themes/twentynineteen $shout
-            rm -rf public/wp-content/themes/twentyseventeen $shout
-            rm -rf public/wp-content/themes/twentysixteen $shout
-            rm -rf public/wp-content/themes/twentyfifteen $shout
-            mkdir -p public/wp-content/themes/blank
-            echo "<?php" > public/wp-content/themes/blank/index.php
-            echo "<?php" > public/wp-content/themes/blank/header.php
-            echo "<?php" > public/wp-content/themes/blank/footer.php
-            echo "/* Theme Name:  Blank */" > public/wp-content/themes/blank/style.css
+#            rm public/wp-config-sample.php $shout
+#            rm public/license.txt $shout
+#            rm public/readme.html $shout
+#
+#            rm -rf public/wp-content/plugins/akismet $shout
+#            rm public/wp-content/plugins/hello.php $shout
+#
+#            rm -rf public/wp-content/themes/twentynineteen $shout
+#            rm -rf public/wp-content/themes/twentyseventeen $shout
+#            rm -rf public/wp-content/themes/twentysixteen $shout
+#            rm -rf public/wp-content/themes/twentyfifteen $shout
+#            mkdir -p public/wp-content/themes/blank
+#            echo "<?php" > public/wp-content/themes/blank/index.php
+#            echo "<?php" > public/wp-content/themes/blank/header.php
+#            echo "<?php" > public/wp-content/themes/blank/footer.php
+#            echo "/* Theme Name:  Blank */" > public/wp-content/themes/blank/style.css
 
             sensiopal_build_wp
             
@@ -1195,47 +1119,37 @@ function sensiopal_build()
 }
 
 ##
-## Wordpress
+## Drupal
 ##
 function sensiopal_build_wp()
 {
 
     if [ $PROJECT_ID ] 
         then
-            echo "$(tput setaf 6)SENSIOPAL::BUILD - Wordpress Themes$(tput setaf 7)"
+#            echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal Themes$(tput setaf 7)"
             
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root theme activate blank" $shout
+#            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root theme activate blank" $shout
 
-            echo "$(tput setaf 6)SENSIOPAL::BUILD - Wordpress Plugins$(tput setaf 7)"
+            echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal Plugins$(tput setaf 7)"
 
-            if [ $WP_PLUGINS == "y" ]
+            if [ $DP_PLUGINS == "y" ]
                 then
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install members --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install cookiebot --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install imsanity --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install intuitive-custom-post-order --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install loco-translate --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install post-duplicator --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install redirection --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install scalable-vector-graphics-svg --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install autodescription --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install term-management-tools --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install user-switching --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install wp-widget-disable --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install wp-user-avatars --activate" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install fix-image-rotation --activate" $shout
-
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install restricted-site-access" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install google-analytics-dashboard-for-wp" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install debug-objects" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install happyforms" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install polylang" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install polylang-theme-strings" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install antispam-bee" $shout
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install easy-wp-smtp" $shout
+                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal module:install drush admin_toolbar entity_browser entity_reference_revisions entity_usage field_group linkit paragraphs conditional_fields crop image_widget_crop --composer" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drush/drush" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/admin_toolbar" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/entity_browser" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/entity_reference_revisions" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/entity_usage" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/field_group" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/linkit" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/paragraphs" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/conditional_fields" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/crop" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/image_widget_crop" $shout
+#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install easy-wp-smtp" $shout
             fi
 
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin activate linotype" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal module:install drush --composer" $shout
 
         else 
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No project found$(tput setaf 7)"
@@ -1254,24 +1168,12 @@ function sensiopal_db_local_import()
 
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/local.sql ]
         then
-            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare wordpress$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin deactivate --all --network" $shout
+            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root db import /var/www/db/local.sql" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - Search and replace $STAGING_DOMAIN to $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace '$STAGING_DOMAIN' '$LOCAL_DOMAIN'" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - Search and replace $PREPRODUCTION_DOMAIN to $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace '$PREPRODUCTION_DOMAIN' '$LOCAL_DOMAIN'" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - Search and replace $PRODUCTION_DOMAIN to $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace '$PRODUCTION_DOMAIN' '$LOCAL_DOMAIN'" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - force https on $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace 'http://$LOCAL_DOMAIN' 'https://$LOCAL_DOMAIN'" $shout
-            # echo "$(tput setaf 6)SENSIOPAL::DB - Reset admin password$(tput setaf 7)"
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user create $LOCAL_WP_USER $LOCAL_WP_USER@$LOCAL_DOMAIN --role=administrator --quiet" $shout
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user update $LOCAL_WP_USER --user_pass='$LOCAL_WP_PASS'" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/local.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/local.sql$(tput setaf 7)"
     fi
@@ -1283,20 +1185,12 @@ function sensiopal_db_local_import_staging()
 
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/staging.sql ]
         then
-            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare wordpress$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin deactivate --all --network" $shout
+            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root db import /var/www/db/staging.sql" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - Search and replace $STAGING_DOMAIN to $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace '$STAGING_DOMAIN' '$LOCAL_DOMAIN'" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - force https on $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace 'http://$LOCAL_DOMAIN' 'https://$LOCAL_DOMAIN'" $shout
-            # echo "$(tput setaf 6)SENSIOPAL::DB - Reset admin password$(tput setaf 7)"
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user create $LOCAL_WP_USER $LOCAL_WP_USER@$LOCAL_DOMAIN --role=administrator --quiet" $shout
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user update $LOCAL_WP_USER --user_pass='$LOCAL_WP_PASS'" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/staging.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/staging.sql$(tput setaf 7)"
     fi
@@ -1308,20 +1202,12 @@ function sensiopal_db_local_import_preproduction()
 
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/preproduction.sql ]
         then
-            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare wordpress$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin deactivate --all --network" $shout
+            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root db import /var/www/db/preproduction.sql" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - Search and replace $PREPRODUCTION_DOMAIN to $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace '$PREPRODUCTION_DOMAIN' '$LOCAL_DOMAIN'" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - force https on $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace 'http://$LOCAL_DOMAIN' 'https://$LOCAL_DOMAIN'" $shout
-            # echo "$(tput setaf 6)SENSIOPAL::DB - Reset admin password$(tput setaf 7)"
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user create $LOCAL_WP_USER $LOCAL_WP_USER@$LOCAL_DOMAIN --role=administrator --quiet" $shout
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user update $LOCAL_WP_USER --user_pass='$LOCAL_WP_PASS'" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/preproduction.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/preproduction.sql$(tput setaf 7)"
     fi
@@ -1333,20 +1219,12 @@ function sensiopal_db_local_import_production()
 
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/production.sql ]
         then
-            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare wordpress$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin deactivate --all --network" $shout
+            echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root db import /var/www/db/production.sql" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - Search and replace $PRODUCTION_DOMAIN to $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace '$PRODUCTION_DOMAIN' '$LOCAL_DOMAIN'" $shout
-            echo "$(tput setaf 6)SENSIOPAL::DB - force https on $LOCAL_DOMAIN$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root search-replace 'http://$LOCAL_DOMAIN' 'https://$LOCAL_DOMAIN'" $shout
-            # echo "$(tput setaf 6)SENSIOPAL::DB - Reset admin password$(tput setaf 7)"
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user create $LOCAL_WP_USER $LOCAL_WP_USER@$LOCAL_DOMAIN --role=administrator --quiet" $shout
-            # docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root user update $LOCAL_WP_USER --user_pass='$LOCAL_WP_PASS'" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/production.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root transient delete --all" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/production.sql$(tput setaf 7)"
     fi
@@ -1361,7 +1239,7 @@ function sensiopal_db_local_export()
 
     echo "$(tput setaf 6)SENSIOPAL::DB - Export$(tput setaf 7)"
 
-    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root db export /var/www/db/local.sql" $shout
+    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:dump --file=/var/www/db/local.sql" $shout
 
 }
 
@@ -1701,7 +1579,7 @@ function sensiopal_deploy_sftp_staging()
             put -r public/wp-signup.php
             put -r public/wp-trackback.php
             put -r public/xmlrpc.php
-            put -r local/wp/wp-config.staging.php
+            put -r local/dp/dp-config.staging.php
             rename wp-config.staging.php wp-config.php" | sftp 1682386@sftp.sd3.gpaas.net:/lamp0/web/vhosts/55073af37ea34f71b67511314eeb4ec8.yatu.ws/htdocs
 
             sensiopal_ready
@@ -1747,7 +1625,7 @@ function sensiopal_deploy_sftp_preproduction()
             put -r public/wp-signup.php
             put -r public/wp-trackback.php
             put -r public/xmlrpc.php
-            put -r local/wp/wp-config.preproduction.php
+            put -r local/dp/dp-config.preproduction.php
             rename wp-config.preproduction.php wp-config.php" | sftp 1682386@sftp.sd3.gpaas.net:/lamp0/web/vhosts/55073af37ea34f71b67511314eeb4ec8.yatu.ws/htdocs
 
             sensiopal_ready
@@ -1819,7 +1697,7 @@ function sensiopal_deploy_sftp_production()
             put -r public/wp-signup.php
             put -r public/wp-trackback.php
             put -r public/xmlrpc.php
-            put -r local/wp/wp-config.production.php
+            put -r local/dp/dp-config.production.php
             rename wp-config.production.php wp-config.php
             " | sftp 1682386@sftp.sd3.gpaas.net:/lamp0/web/vhosts/128db.fr/htdocs
 
@@ -1900,7 +1778,7 @@ function sensiopal_create_step__directories()
     mkdir -p local/ssl
     mkdir -p local/conf
     mkdir -p local/ssh
-    mkdir -p local/wp
+    mkdir -p local/dp
 
     mkdir -p logs/php
     mkdir -p logs/apache
@@ -1946,9 +1824,9 @@ GITHUB_USER=$GITHUB_USER
 GITHUB_REPO=$GITHUB_REPO
 
 LOCAL_DOMAIN=$LOCAL_DOMAIN
-LOCAL_WP_USER=$LOCAL_WP_USER
-LOCAL_WP_PASS=$LOCAL_WP_PASS
-LOCAL_WP_DB_PREFIX=$LOCAL_WP_DB_PREFIX
+LOCAL_DP_USER=$LOCAL_DP_USER
+LOCAL_DP_PASS=$LOCAL_DP_PASS
+LOCAL_DP_DB_PREFIX=$LOCAL_DP_DB_PREFIX
 LOCAL_BRANCH=$LOCAL_BRANCH
 
 STAGING_DOMAIN=$STAGING_DOMAIN
@@ -1961,8 +1839,8 @@ STAGING_DB_PREFIX=$STAGING_DB_PREFIX
 STAGING_DB_USER=$STAGING_DB_USER
 STAGING_DB_PASS=$STAGING_DB_PASS
 STAGING_DB_HOST=$STAGING_DB_HOST
-STAGING_WP_USER=$LOCAL_WP_USER
-STAGING_WP_PASS=$STAGING_WP_PASS
+STAGING_DP_USER=$LOCAL_DP_USER
+STAGING_DP_PASS=$STAGING_DP_PASS
 STAGING_BRANCH=$STAGING_BRANCH
 
 PREPRODUCTION_DOMAIN=$PREPRODUCTION_DOMAIN
@@ -1975,8 +1853,8 @@ PREPRODUCTION_DB_PREFIX=$PREPRODUCTION_DB_PREFIX
 PREPRODUCTION_DB_USER=$PREPRODUCTION_DB_USER
 PREPRODUCTION_DB_PASS=$PREPRODUCTION_DB_PASS
 PREPRODUCTION_DB_HOST=$PREPRODUCTION_DB_HOST
-PREPRODUCTION_WP_USER=$LOCAL_WP_USER
-PREPRODUCTION_WP_PASS=$PREPRODUCTION_WP_PASS
+PREPRODUCTION_DP_USER=$LOCAL_DP_USER
+PREPRODUCTION_DP_PASS=$PREPRODUCTION_DP_PASS
 PREPRODUCTION_BRANCH=$PREPRODUCTION_BRANCH
 
 PRODUCTION_DOMAIN=$PRODUCTION_DOMAIN
@@ -1989,8 +1867,8 @@ PRODUCTION_DB_PREFIX=$PRODUCTION_DB_PREFIX
 PRODUCTION_DB_USER=$PRODUCTION_DB_USER
 PRODUCTION_DB_PASS=$PRODUCTION_DB_PASS
 PRODUCTION_DB_HOST=$PRODUCTION_DB_HOST
-PRODUCTION_WP_USER=$LOCAL_WP_USER
-PRODUCTION_WP_PASS=$PRODUCTION_WP_PASS
+PRODUCTION_DP_USER=$LOCAL_DP_USER
+PRODUCTION_DP_PASS=$PRODUCTION_DP_PASS
 PRODUCTION_BRANCH=$PRODUCTION_BRANCH
 EOF
 
@@ -2032,10 +1910,10 @@ function sensiopal_create_step__readme_local()
 }
 
 #new README
-function sensiopal_create_step__wp_config()
+function sensiopal_create_step__dp_config()
 {
 
-    echo "$(tput setaf 6)SENSIOPAL::INIT - Create Wordpress staging config$(tput setaf 7)"
+    echo "$(tput setaf 6)SENSIOPAL::INIT - Create Drupal staging config$(tput setaf 7)"
     sed "
     s/VAR_FILE/staging/g
     s/VAR_DB_NAME/$STAGING_DB_NAME/g
@@ -2045,9 +1923,9 @@ function sensiopal_create_step__wp_config()
     s/VAR_DB_PREFIX/$STAGING_DB_PREFIX/g
     s/VAR_SALT/fdrstaghdofiudtsregbcgdfrstekgfh/g
     s/VAR_DEBUG/true/g
-    " $SCRIPT_PATH/includes/templates/local/wp/wp-config.php > local/wp/wp-config.staging.php
+    " $SCRIPT_PATH/includes/templates/local/dp/dp-config.php > local/dp/dp-config.staging.php
 
-    echo "$(tput setaf 6)SENSIOPAL::INIT - Create Wordpress preproduction config$(tput setaf 7)"
+    echo "$(tput setaf 6)SENSIOPAL::INIT - Create Drupal preproduction config$(tput setaf 7)"
     sed "
     s/VAR_FILE/preproduction/g
     s/VAR_DB_NAME/$PREPRODUCTION_DB_NAME/g
@@ -2057,9 +1935,9 @@ function sensiopal_create_step__wp_config()
     s/VAR_DB_PREFIX/$PREPRODUCTION_DB_PREFIX/g
     s/VAR_SALT/fdrstaghdofiudtsregbcgdfrstekgfh/g
     s/VAR_DEBUG/false/g
-    " $SCRIPT_PATH/includes/templates/local/wp/wp-config.php > local/wp/wp-config.preproduction.php
+    " $SCRIPT_PATH/includes/templates/local/dp/dp-config.php > local/dp/dp-config.preproduction.php
 
-    echo "$(tput setaf 6)SENSIOPAL::INIT - Create Wordpress production config$(tput setaf 7)"
+    echo "$(tput setaf 6)SENSIOPAL::INIT - Create Drupal production config$(tput setaf 7)"
     sed "
     s/VAR_FILE/production/g
     s/VAR_DB_NAME/$PRODUCTION_DB_NAME/g
@@ -2069,7 +1947,7 @@ function sensiopal_create_step__wp_config()
     s/VAR_DB_PREFIX/$PRODUCTION_DB_PREFIX/g
     s/VAR_SALT/fdrstaghdofiudtsregbcgdfrstekgfh/g
     s/VAR_DEBUG/false/g
-    " $SCRIPT_PATH/includes/templates/local/wp/wp-config.php > local/wp/wp-config.production.php
+    " $SCRIPT_PATH/includes/templates/local/dp/dp-config.php > local/dp/dp-config.production.php
 
 }
 
@@ -2197,8 +2075,8 @@ function sensiopal_create_step__docker_compose()
     echo "$(tput setaf 6)SENSIOPAL::INIT - Create docker-compose$(tput setaf 7)"
     sed "
     s/VAR_PROJECT_ID/$PROJECT_ID/g
-    s/VAR_LOCAL_WP_USER/$LOCAL_WP_USER/g
-    s/VAR_LOCAL_WP_PASS/$LOCAL_WP_PASS/g
+    s/VAR_LOCAL_DP_USER/$LOCAL_DP_USER/g
+    s/VAR_LOCAL_DP_PASS/$LOCAL_DP_PASS/g
     " $SCRIPT_PATH/includes/templates/local/config.yml > local/config.yml
 
 }
@@ -2295,8 +2173,8 @@ function sensiopal_create_step__docs()
     s/VAR_STAGING_DB_USER/$STAGING_DB_USER/g
     s/VAR_STAGING_DB_PASS/$STAGING_DB_PASS/g
     s/VAR_STAGING_DB_HOST/$STAGING_DB_HOST/g
-    s/VAR_STAGING_WP_USER/$STAGING_WP_USER/g
-    s/VAR_STAGING_WP_PASS/$STAGING_WP_PASS/g
+    s/VAR_STAGING_DP_USER/$STAGING_DP_USER/g
+    s/VAR_STAGING_DP_PASS/$STAGING_DP_PASS/g
     s/VAR_STAGING_BRANCH/${STAGING_BRANCH//\//\\/}/g
     s/VAR_PREPRODUCTION_DOMAIN/$PREPRODUCTION_DOMAIN/g
     s/VAR_PREPRODUCTION_DIR/${PREPRODUCTION_DIR//\//\\/}/g
@@ -2308,8 +2186,8 @@ function sensiopal_create_step__docs()
     s/VAR_PREPRODUCTION_DB_USER/$PREPRODUCTION_DB_USER/g
     s/VAR_PREPRODUCTION_DB_PASS/$PREPRODUCTION_DB_PASS/g
     s/VAR_PREPRODUCTION_DB_HOST/$PREPRODUCTION_DB_HOST/g
-    s/VAR_PREPRODUCTION_WP_USER/$PREPRODUCTION_WP_USER/g
-    s/VAR_PREPRODUCTION_WP_PASS/$PREPRODUCTION_WP_PASS/g
+    s/VAR_PREPRODUCTION_DP_USER/$PREPRODUCTION_DP_USER/g
+    s/VAR_PREPRODUCTION_DP_PASS/$PREPRODUCTION_DP_PASS/g
     s/VAR_PREPRODUCTION_BRANCH/${PREPRODUCTION_BRANCH//\//\\/}/g
     s/VAR_PRODUCTION_DOMAIN/$PRODUCTION_DOMAIN/g
     s/VAR_PRODUCTION_DIR/${PRODUCTION_DIR//\//\\/}/g
@@ -2321,8 +2199,8 @@ function sensiopal_create_step__docs()
     s/VAR_PRODUCTION_DB_USER/$PRODUCTION_DB_USER/g
     s/VAR_PRODUCTION_DB_PASS/$PRODUCTION_DB_PASS/g
     s/VAR_PRODUCTION_DB_HOST/$PRODUCTION_DB_HOST/g
-    s/VAR_PRODUCTION_WP_USER/$PRODUCTION_WP_USER/g
-    s/VAR_PRODUCTION_WP_PASS/$PRODUCTION_WP_PASS/g
+    s/VAR_PRODUCTION_DP_USER/$PRODUCTION_DP_USER/g
+    s/VAR_PRODUCTION_DP_PASS/$PRODUCTION_DP_PASS/g
     s/VAR_PRODUCTION_BRANCH/${PRODUCTION_BRANCH//\//\\/}/g
     " $SCRIPT_PATH/includes/templates/doc/environnements.md > doc/environnements.md
 

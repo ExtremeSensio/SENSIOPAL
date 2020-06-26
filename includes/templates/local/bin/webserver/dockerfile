@@ -92,7 +92,7 @@ COPY npm/package.json /root/npm/package.json
 RUN curl -sL https://npmjs.org/install.sh | sh
 RUN cd /root/npm && npm install --no-optional
 
-# WP Cli
+# DP Cli
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp

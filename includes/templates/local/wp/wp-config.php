@@ -20,14 +20,14 @@ define( 'AUTH_SALT',         'VAR_SALT' );
 define( 'SECURE_AUTH_SALT',  'VAR_SALT' );
 define( 'LOGGED_IN_SALT',    'VAR_SALT' );
 define( 'NONCE_SALT',        'VAR_SALT' );
-define( 'WP_CACHE_KEY_SALT', 'VAR_SALT' );
+define( 'DP_CACHE_KEY_SALT', 'VAR_SALT' );
 
 $table_prefix = 'VAR_DB_PREFIX';
 
-define('WP_DEBUG', VAR_DEBUG);
+define('DP_DEBUG', VAR_DEBUG);
 define('SCRIPT_DEBUG', VAR_DEBUG );
-define('WP_DEBUG_LOG', VAR_DEBUG );
-define('WP_DEBUG_DISPLAY', VAR_DEBUG );
+define('DP_DEBUG_LOG', VAR_DEBUG );
+define('DP_DEBUG_DISPLAY', VAR_DEBUG );
 
 define('ALLOW_UNFILTERED_UPLOADS', true );
 

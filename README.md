@@ -10,7 +10,7 @@ CLI WORDPRESS PROJECT MANAGER
   - [x] [Docker](https://docs.docker.com/install/) for local environements
   - [x] [Docker Machine](https://docs.docker.com/machine/install-machine/) for local environements
   - [x] [Virtualbox](https://www.virtualbox.org/) for Docker Machine
-  - [x] [WPCLI](https://wp-cli.org/) for wordpress management
+  - [x] [DPCLI](https://wp-cli.org/) for wordpress management
   - [x] [HUB](https://hub.github.com/) for github tasks
   - [x] [DEPLOYER](https://deployer.org/download/) A deployment tool for PHP
   

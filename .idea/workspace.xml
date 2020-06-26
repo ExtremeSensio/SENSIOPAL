@@ -16,7 +16,7 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/README.md">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="-342" />
@@ -26,26 +26,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/dep/deploy.php">
+        <entry file="file://$PROJECT_DIR$/includes/templates/local/dep/deploy.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="30" column="28" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="28" />
+            <state relative-caret-position="311">
+              <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/npm/gulpfile.js">
+        <entry file="file://$PROJECT_DIR$/includes/templates/local/npm/gulpfile.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/npm/package.json">
+        <entry file="file://$PROJECT_DIR$/includes/templates/local/npm/package.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/php/app.ini">
+        <entry file="file://$PROJECT_DIR$/includes/templates/local/php/app.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
@@ -53,17 +53,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/wp/wp-config.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/includes/templates/local/wp/wp-config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
+            <state relative-caret-position="160">
+              <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/config.yml">
+        <entry file="file://$PROJECT_DIR$/includes/templates/local/config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="483">
               <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
@@ -71,11 +71,79 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../SENSIOPAL/install.sh">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/install.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+            <state relative-caret-position="590">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sensiopress.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="1673" column="12" lean-forward="true" selection-start-line="1673" selection-start-column="12" selection-end-line="1673" selection-end-column="12" />
+              <folding>
+                <element signature="e#34#5635#0" />
+                <element signature="e#5691#7563#0" />
+                <element signature="e#11419#14295#0" />
+                <element signature="e#14330#15044#0" />
+                <element signature="e#15078#15642#0" />
+                <element signature="e#15684#15970#0" />
+                <element signature="e#16619#22100#0" />
+                <element signature="e#22150#22780#0" />
+                <element signature="e#25210#25836#0" />
+                <element signature="e#25879#26765#0" />
+                <element signature="e#26812#28322#0" />
+                <element signature="e#28365#28472#0" />
+                <element signature="e#28513#28647#0" />
+                <element signature="e#28695#29495#0" />
+                <element signature="e#31342#31460#0" />
+                <element signature="e#31541#33223#0" />
+                <element signature="e#33530#34924#0" />
+                <element signature="e#37262#39845#0" />
+                <element signature="e#39891#41926#0" />
+                <element signature="e#41978#44043#0" />
+                <element signature="e#44092#46142#0" />
+                <element signature="e#46207#46403#0" />
+                <element signature="e#46448#47770#0" />
+                <element signature="e#47802#48920#0" />
+                <element signature="e#48980#49500#0" />
+                <element signature="e#49733#49835#0" />
+                <element signature="e#49994#50396#0" />
+                <element signature="e#50435#50827#0" />
+                <element signature="e#50861#51243#0" />
+                <element signature="e#51317#51727#0" />
+                <element signature="e#51777#52201#0" />
+                <element signature="e#52246#52660#0" />
+                <element signature="e#52700#53104#0" />
+                <element signature="e#53172#53573#0" />
+                <element signature="e#53620#54035#0" />
+                <element signature="e#54077#54482#0" />
+                <element signature="e#54519#54914#0" />
+                <element signature="e#64953#65617#0" />
+                <element signature="e#65876#66337#0" />
+                <element signature="e#66392#68757#0" />
+                <element signature="e#68814#68990#0" />
+                <element signature="e#69045#69302#0" />
+                <element signature="e#69363#69566#0" />
+                <element signature="e#69624#71151#0" />
+                <element signature="e#71216#72366#0" />
+                <element signature="e#72431#75795#0" />
+                <element signature="e#75866#76153#0" />
+                <element signature="e#76236#76468#0" />
+                <element signature="e#76547#76771#0" />
+                <element signature="e#76828#77022#0" />
+                <element signature="e#77083#77297#0" />
+                <element signature="e#77363#77563#0" />
+                <element signature="e#77630#77829#0" />
+                <element signature="e#77880#81074#0" />
+                <element signature="e#81133#83037#0" />
+                <element signature="e#83097#83433#0" />
+                <element signature="e#83486#83731#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,17 +158,39 @@
       <find>projectmanager</find>
       <find>PROJECTMANAGER</find>
       <find>wp-config</find>
+      <find>LOCAL_WP_USER</find>
+      <find>LOCAL_WP_PASS</find>
+      <find>LOCAL_WP_DB_PREFIX</find>
+      <find>WP</find>
+      <find>wp</find>
+      <find>sensiopal_check_linotype_version</find>
+      <find>Wordpress</find>
+      <find>wordpress</find>
+      <find>sensiopal_create_step__wp_config</find>
+      <find>wp/wp-config</find>
+      <find>wp/wp-</find>
+      <find>dp/dp-</find>
+      <find>dp/dp</find>
+      <find>dp</find>
     </findStrings>
     <replaceStrings>
-      <replace>/var/www/html/web</replace>
       <replace>PROJECTMANAGER</replace>
       <replace>projectmanager</replace>
       <replace>sensiopal</replace>
       <replace>SENSIOPAL</replace>
+      <replace>LOCAL_DP_USER</replace>
+      <replace>LOCAL_DP_PASS</replace>
+      <replace>LOCAL_DP_DB_PREFIX</replace>
+      <replace>/var/www/html/web</replace>
+      <replace>DP</replace>
+      <replace />
+      <replace>Drupal</replace>
+      <replace>drupal</replace>
+      <replace>dp/dp-config</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
-      <dir>$PROJECT_DIR$/../SENSIOPAL</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -113,11 +203,14 @@
         <option value="$PROJECT_DIR$/includes/templates/local/wp/wp-config.php" />
         <option value="$PROJECT_DIR$/includes/templates/local/config.yml" />
         <option value="$PROJECT_DIR$/install.sh" />
+        <option value="$PROJECT_DIR$/install.sh" />
+        <option value="$PROJECT_DIR$/sensiopress.sh" />
+        <option value="$PROJECT_DIR$/includes/templates/local/dep/deploy.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="36" />
+    <option name="x" value="200" />
     <option name="y" value="23" />
     <option name="width" value="1376" />
     <option name="height" value="877" />
@@ -151,54 +244,7 @@
               <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
               <item name="includes" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="doc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PROJECTMANAGER" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="local" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PROJECTMANAGER" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PROJECTMANAGER" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="dep" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PROJECTMANAGER" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="npm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PROJECTMANAGER" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="php" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PROJECTMANAGER" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SENSIOPAL" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="local" type="462c0819:PsiDirectoryNode" />
-              <item name="wp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -207,6 +253,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -235,12 +282,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1593164211974</updated>
-      <workItem from="1593164213194" duration="3223000" />
+      <workItem from="1593164213194" duration="23475000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3223000" />
+    <option name="totallyTimeSpent" value="23475000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1376" height="877" extended-state="6" />
@@ -252,8 +299,8 @@
       <window_info anchor="bottom" id="Docker" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" sideWeight="0.49925038" visible="true" weight="0.43057325" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.50074965" side_tool="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -272,10 +319,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/preview.gif">
+    <entry file="file://$PROJECT_DIR$/preview.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/todo.md">
+    <entry file="file://$PROJECT_DIR$/todo.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor />
@@ -283,25 +330,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/bin/mysql/Dockerfile">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/bin/mysql/Dockerfile">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/bin/webserver/dockerfile">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/bin/webserver/dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-102" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/conf/app.conf">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/conf/app.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
           <caret line="84" selection-start-line="84" selection-end-line="84" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/sensiopress.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/README.md">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="-342" />
@@ -309,48 +353,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/dep/sync-from.php">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/dep/sync-from.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="50" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/dep/sync-to.php">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/dep/sync-to.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/dep/deploy.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="30" column="28" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/npm/gulpfile.js">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/npm/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/npm/package.json">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/npm/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/php/app.ini">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/php/app.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/wp/wp-config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/local.md">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/local.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor />
@@ -358,17 +388,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/includes/templates/local/config.yml">
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SENSIOPAL/install.sh">
+    <entry file="file://$PROJECT_DIR$/install.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+        <state relative-caret-position="590">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sensiopress.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="1673" column="12" lean-forward="true" selection-start-line="1673" selection-start-column="12" selection-end-line="1673" selection-end-column="12" />
+          <folding>
+            <element signature="e#34#5635#0" />
+            <element signature="e#5691#7563#0" />
+            <element signature="e#11419#14295#0" />
+            <element signature="e#14330#15044#0" />
+            <element signature="e#15078#15642#0" />
+            <element signature="e#15684#15970#0" />
+            <element signature="e#16619#22100#0" />
+            <element signature="e#22150#22780#0" />
+            <element signature="e#25210#25836#0" />
+            <element signature="e#25879#26765#0" />
+            <element signature="e#26812#28322#0" />
+            <element signature="e#28365#28472#0" />
+            <element signature="e#28513#28647#0" />
+            <element signature="e#28695#29495#0" />
+            <element signature="e#31342#31460#0" />
+            <element signature="e#31541#33223#0" />
+            <element signature="e#33530#34924#0" />
+            <element signature="e#37262#39845#0" />
+            <element signature="e#39891#41926#0" />
+            <element signature="e#41978#44043#0" />
+            <element signature="e#44092#46142#0" />
+            <element signature="e#46207#46403#0" />
+            <element signature="e#46448#47770#0" />
+            <element signature="e#47802#48920#0" />
+            <element signature="e#48980#49500#0" />
+            <element signature="e#49733#49835#0" />
+            <element signature="e#49994#50396#0" />
+            <element signature="e#50435#50827#0" />
+            <element signature="e#50861#51243#0" />
+            <element signature="e#51317#51727#0" />
+            <element signature="e#51777#52201#0" />
+            <element signature="e#52246#52660#0" />
+            <element signature="e#52700#53104#0" />
+            <element signature="e#53172#53573#0" />
+            <element signature="e#53620#54035#0" />
+            <element signature="e#54077#54482#0" />
+            <element signature="e#54519#54914#0" />
+            <element signature="e#64953#65617#0" />
+            <element signature="e#65876#66337#0" />
+            <element signature="e#66392#68757#0" />
+            <element signature="e#68814#68990#0" />
+            <element signature="e#69045#69302#0" />
+            <element signature="e#69363#69566#0" />
+            <element signature="e#69624#71151#0" />
+            <element signature="e#71216#72366#0" />
+            <element signature="e#72431#75795#0" />
+            <element signature="e#75866#76153#0" />
+            <element signature="e#76236#76468#0" />
+            <element signature="e#76547#76771#0" />
+            <element signature="e#76828#77022#0" />
+            <element signature="e#77083#77297#0" />
+            <element signature="e#77363#77563#0" />
+            <element signature="e#77630#77829#0" />
+            <element signature="e#77880#81074#0" />
+            <element signature="e#81133#83037#0" />
+            <element signature="e#83097#83433#0" />
+            <element signature="e#83486#83731#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/dep/deploy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/templates/local/wp/wp-config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
         </state>
       </provider>
     </entry>

@@ -40,8 +40,8 @@ Plugins:
 *   Redirection
 *   Regenerate Thumbnails
 *   The SEO Framework
-*   Easy WP SMTP
-*   WP Post Ratings
+*   Easy DP SMTP
+*   DP Post Ratings
 
 _Toutes les extensions sont installées dans leur dernière version lors de la création du projet.  
 Ces extensions doivent être maintenues à jour pour garantir une sécurité maximum du site._  

@@ -26,8 +26,8 @@ services:
       - ./npm/gulpfile.js:/root/npm/gulpfile.js
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: VAR_LOCAL_WP_USER
-      MYSQL_PASSWORD: VAR_LOCAL_WP_PASS
+      MYSQL_USER: VAR_LOCAL_DP_USER
+      MYSQL_PASSWORD: VAR_LOCAL_DP_PASS
       MYSQL_DATABASE: db_VAR_PROJECT_ID
             
   db_VAR_PROJECT_ID:
@@ -42,8 +42,8 @@ services:
       - ./../logs/mysql:/var/log/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: VAR_LOCAL_WP_USER
-      MYSQL_PASSWORD: VAR_LOCAL_WP_PASS
+      MYSQL_USER: VAR_LOCAL_DP_USER
+      MYSQL_PASSWORD: VAR_LOCAL_DP_PASS
       MYSQL_DATABASE: db_VAR_PROJECT_ID
 
   redis:

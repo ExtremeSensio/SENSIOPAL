@@ -9,7 +9,7 @@ If you don't, you can still use local environement and deployement by full comma
   - [x] [Docker](https://docs.docker.com/install/) for local environements
   - [x] [Docker Machine](https://docs.docker.com/machine/install-machine/) for local environements
   - [x] [Virtualbox](https://www.virtualbox.org/) for Docker Machine
-  - [ ] [WPCLI](https://wp-cli.org/) for wordpress management
+  - [ ] [DPCLI](https://wp-cli.org/) for wordpress management
   - [ ] [HUB](https://hub.github.com/) for github tasks
   - [x] [DEPLOYER](https://deployer.org/download/) A deployment tool for PHP
   

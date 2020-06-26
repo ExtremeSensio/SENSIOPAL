@@ -190,7 +190,7 @@ task('rsync_app', function() {
 
 desc('Overwrite wp-config.php');
 task('deploy:update_wp_config', function () {
-    upload( 'local/wp/wp-config.VAR_FILE.php', '{{release_path}}/wp-config.php' );
+    upload( 'local/dp/dp-config.VAR_FILE.php', '{{release_path}}/dp-config.php' );
 });
 
 task('deploy:chown', function () {
