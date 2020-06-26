@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48b6b4d3-f090-4e7c-8efc-3dc2672700f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/templates/doc/documentation.md" beforeDir="false" afterPath="$PROJECT_DIR$/includes/templates/doc/documentation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensiopress.sh" beforeDir="false" afterPath="$PROJECT_DIR$/sensiopress.sh" afterDir="false" />
-    </list>
+    <list default="true" id="48b6b4d3-f090-4e7c-8efc-3dc2672700f4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,16 +71,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/install.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
+            <state relative-caret-position="382">
               <caret line="51" column="114" selection-start-line="51" selection-start-column="114" selection-end-line="51" selection-end-column="114" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sensiopress.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="266">
@@ -216,12 +211,12 @@
       <option name="presentableId" value="Default" />
       <updated>1593164211974</updated>
       <workItem from="1593164213194" duration="23475000" />
-      <workItem from="1593193508565" duration="538000" />
+      <workItem from="1593193508565" duration="686000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24013000" />
+    <option name="totallyTimeSpent" value="24161000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1376" height="877" extended-state="6" />
@@ -343,17 +338,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/install.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="51" column="114" selection-start-line="51" selection-start-column="114" selection-end-line="51" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sensiopress.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="216" lean-forward="true" selection-start-line="216" selection-end-line="216" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="51" column="114" selection-start-line="51" selection-start-column="114" selection-end-line="51" selection-end-column="114" />
         </state>
       </provider>
     </entry>
