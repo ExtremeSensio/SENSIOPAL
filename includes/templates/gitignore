@@ -1,0 +1,7 @@
+!local
+.temp
+.idea
+logs
+*.log
+.DS_Store
+public/wp-content/uploads

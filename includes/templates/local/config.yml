@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  
+  sensiopal:
+    build: 
+      context: ./
+      dockerfile: ./bin/webserver/Dockerfile
+    container_name: 'VAR_PROJECT_ID-webserver'
+    restart: 'always'
+    tty: true
+    ports:
+      - 80:80
+      - 443:443
+    links: 
+      - db_VAR_PROJECT_ID
+      - redis
+    volumes: 
+      - ./../public:/var/www/html
+      - ./../local/dep:/var/www/dep
+      - ./../local/db:/var/www/db
+      - ./../logs/apache:/var/log/apache2
+      - ./ssl:/etc/ssl/certs
+      - ./ssh:/root/.ssh
+      - ./npm/package.json:/root/npm/package.json
+      - ./npm/gulpfile.js:/root/npm/gulpfile.js
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: VAR_LOCAL_WP_USER
+      MYSQL_PASSWORD: VAR_LOCAL_WP_PASS
+      MYSQL_DATABASE: db_VAR_PROJECT_ID
+            
+  db_VAR_PROJECT_ID:
+    image: mysql:5.6
+    container_name: 'VAR_PROJECT_ID-mysql'
+    restart: 'always'
+    tty: true
+    ports:
+      - 3306:3306
+    volumes:
+      - db_VAR_PROJECT_ID:/var/lib/mysql
+      - ./../logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: VAR_LOCAL_WP_USER
+      MYSQL_PASSWORD: VAR_LOCAL_WP_PASS
+      MYSQL_DATABASE: db_VAR_PROJECT_ID
+
+  redis:
+    image: redis
+    restart: 'always'
+    tty: true
+    ports:
+      - 6379
+
+volumes:
+    db_VAR_PROJECT_ID: {}
