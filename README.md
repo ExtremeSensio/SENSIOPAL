@@ -27,7 +27,7 @@ $ git clone git@github.com:ExtremeSensio/SENSIOPAL.git ~/SENSIOPAL_sh
 # Add script to bash profile:
 $ echo "source ~/SENSIOPAL_sh/sensiopal.sh" >> ~/.bash_profile
 # Add alias to bash profile:
-$ echo "alias sp='sensiopal'" >> ~/.bash_profile
+$ echo "alias sd='sensiopal'" >> ~/.bash_profile
 ```
 
 # Command

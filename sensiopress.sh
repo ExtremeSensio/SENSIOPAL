@@ -205,7 +205,7 @@ function sensiopal()
 
 } 
 
-alias sp='sensiopal'
+alias sd='sensiopal'
 
 ##
 ## Conf
@@ -1000,7 +1000,7 @@ function sensiopal_run()
                 then
                     echo "$(tput setaf 6)SENSIOPAL::CHECK project... $(tput setaf 1)KO$(tput setaf 7)"
                     echo "$(tput setaf 1)Your project '$PROJECT_ID' is not up to date. You can update it.$(tput setaf 7)"
-                    echo "$(tput setaf 7)If you want you can upgrade this project with $(tput setaf 6)sp init$(tput setaf 7) or just use in current version$(tput setaf 7)"
+                    echo "$(tput setaf 7)If you want you can upgrade this project with $(tput setaf 6)sd init$(tput setaf 7) or just use in current version$(tput setaf 7)"
                     read -p "Start '$PROJECT_ID' anyway? (y/n): " sensiopal_no_update
                     if [ $sensiopal_no_update == "y" ]
                         then

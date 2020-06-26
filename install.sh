@@ -49,7 +49,7 @@ sensiopal_install()
           sed -i '' "/source ~\/.SENSIOPAL\/sensiopal.sh/d" ~/.bash_profile
           echo "source $SCRIPT_DIR/sensiopal.sh" >> ~/.bash_profile
           sleep .5
-          echo "$(tput setaf 6)Yeah! SENSIOPAL installed. Close this terminal and enjoy the new 'sensiopal' or 'sp' command$(tput setaf 7)"
+          echo "$(tput setaf 6)Yeah! SENSIOPAL installed. Close this terminal and enjoy the new 'sensiopal' or 'sd' command$(tput setaf 7)"
     
     fi
 

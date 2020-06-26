@@ -17,57 +17,57 @@ This project is built and maintain with [SENSIOPAL](https://github.com/ExtremeSe
 
 ## Install
 ```
-$ sp install ExtremeSensio/VAR_PROJECT_ID
+$ sd install ExtremeSensio/VAR_PROJECT_ID
 ```
 _Clone project to your local folder ~/SENSIOPAL/$GITHUB_REPO_
 
 ## Up
 ```
-$ sp up
+$ sd up
 ```
 _Go in project folder and start your local environement_
 
 ## Down
 ```
-$ sp down
+$ sd down
 ```
 _Stop your local project with docker_
 
 ## Deploy*
 ```sh
-$ sp deploy github
+$ sd deploy github
 
-$ sp deploy staging
+$ sd deploy staging
 
-$ sp deploy preproduction
+$ sd deploy preproduction
 
-$ sp deploy production
+$ sd deploy production
 ```
 _Deploy your code on each environement_
 
 ## Sync from*
 ```sh
-$ sp sync from staging
+$ sd sync from staging
 
-$ sp sync from preproduction
+$ sd sync from preproduction
 
-$ sp sync from production
+$ sd sync from production
 ```
 _Sync database and media from (staging/preproduction/production) to local_
 
 ## Sync to*
 ```sh
-$ sp sync to staging
+$ sd sync to staging
 
-$ sp sync to preproduction
+$ sd sync to preproduction
 
-$ sp sync to production
+$ sd sync to production
 ```
 _Sync database and media from local to (staging/preproduction/production)_
 
 ## Init/Reset
 ```
-$ sp init
+$ sd init
 ```
 By editing SENSIOPAL file you need to rebuild the static project settings 
 
