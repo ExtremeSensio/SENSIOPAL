@@ -11,8 +11,10 @@ RUN apt-get install -y \
     zip \
     webp \
     unzip \
+    libssl-dev \
     libcurl4 \
     libcurl4-gnutls-dev \
+    libcurl4-openssl-dev \
     mariadb-client \
     libpng-dev \
     libwebp-dev \
