@@ -2110,6 +2110,7 @@ function sensiopal_create_step__php_ini()
     echo "$(tput setaf 6)SENSIOPAL::INIT - Create php ini$(tput setaf 7)"
     sed "
     s/VAR_FILE/php.ini/g
+    s/VAR_PROJECT_ID/$PROJECT_ID/g
     " $SCRIPT_PATH/includes/templates/local/php/app.ini > local/php/app.ini
     
 }
