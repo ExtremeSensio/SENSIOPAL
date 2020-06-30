@@ -1,5 +1,5 @@
 # VAR_PROJECT_ID
-WORDPRESS PROJECT
+DRUPAL PROJECT
 
 # Requirements
 This project is built and maintain with [SENSIOPAL](https://github.com/ExtremeSensio/SENSIOPAL) Use it to easily work with multiple projects, from the local environment to production deployment.

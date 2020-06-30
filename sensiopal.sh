@@ -1090,8 +1090,9 @@ function sensiopal_build()
         then
             echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal core$(tput setaf 7)"
 
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer create-project drupal-composer/drupal-project:8.x-dev --prefer-dist --no-progress --no-interaction" $shout
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal site:install  standard --langcode=fr --db-type=mariadb --db-host=db_$PROJECT_ID --db-port=3306 --db-name=db_$PROJECT_ID --db-prefix=$LOCAL_DP_DB_PREFIX --db-user=root --db-pass=root --account-name=$LOCAL_DP_USER --account-pass=$LOCAL_DP_PASS --site-mail=$DEV_EMAIL --url=https://$LOCAL_DOMAIN --site-name=$PROJECT_ID --no-interaction --force" $shout
+#            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer create-project drupal-composer/drupal-project:8.x-dev --prefer-dist --no-progress --no-interaction" $shout
+            composer create-project drupal-composer/drupal-project:8.x-dev ./public --prefer-dist --no-progress --no-interaction
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal site:install standard --db-host=db_$PROJECT_ID --db-port=3306 --db-name=db_$PROJECT_ID --db-prefix=$LOCAL_DP_DB_PREFIX --db-user=root --db-pass=root --account-name=$LOCAL_DP_USER --account-pass=$LOCAL_DP_PASS --site-mail=$DEV_EMAIL --site-name=$PROJECT_ID --no-interaction --force" $shout
 
 #            rm public/wp-config-sample.php $shout
 #            rm public/license.txt $shout
@@ -1100,10 +1101,6 @@ function sensiopal_build()
 #            rm -rf public/wp-content/plugins/akismet $shout
 #            rm public/wp-content/plugins/hello.php $shout
 #
-#            rm -rf public/wp-content/themes/twentynineteen $shout
-#            rm -rf public/wp-content/themes/twentyseventeen $shout
-#            rm -rf public/wp-content/themes/twentysixteen $shout
-#            rm -rf public/wp-content/themes/twentyfifteen $shout
 #            mkdir -p public/wp-content/themes/blank
 #            echo "<?php" > public/wp-content/themes/blank/index.php
 #            echo "<?php" > public/wp-content/themes/blank/header.php
@@ -1126,30 +1123,14 @@ function sensiopal_build_wp()
 
     if [ $PROJECT_ID ] 
         then
-#            echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal Themes$(tput setaf 7)"
-            
-#            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root theme activate blank" $shout
-
             echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal Plugins$(tput setaf 7)"
 
-            if [ $DP_PLUGINS == "y" ]
-                then
-                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal module:install drush admin_toolbar entity_browser entity_reference_revisions entity_usage field_group linkit paragraphs conditional_fields crop image_widget_crop --composer" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drush/drush" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/admin_toolbar" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/entity_browser" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/entity_reference_revisions" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/entity_usage" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/field_group" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/linkit" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/paragraphs" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/conditional_fields" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/crop" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer require drupal/image_widget_crop" $shout
-#                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "wp --allow-root plugin install easy-wp-smtp" $shout
-            fi
+#            if [ $DP_PLUGINS == "y" ]
+#                then
+##                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal module:install drush admin_toolbar entity_browser entity_reference_revisions entity_usage field_group linkit paragraphs conditional_fields crop image_widget_crop --composer" $shout
+#            fi
 
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal module:install drush --composer" $shout
+#            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal module:install drush --composer" $shout
 
         else 
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No project found$(tput setaf 7)"
@@ -1169,11 +1150,11 @@ function sensiopal_db_local_import()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/local.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/local.sql" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/local.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/local.sql$(tput setaf 7)"
     fi
@@ -1186,11 +1167,11 @@ function sensiopal_db_local_import_staging()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/staging.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/staging.sql" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/staging.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/staging.sql$(tput setaf 7)"
     fi
@@ -1203,11 +1184,11 @@ function sensiopal_db_local_import_preproduction()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/preproduction.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/preproduction.sql" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/preproduction.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/preproduction.sql$(tput setaf 7)"
     fi
@@ -1220,11 +1201,11 @@ function sensiopal_db_local_import_production()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/production.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:restore --file=/var/www/db/production.sql" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/production.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/production.sql$(tput setaf 7)"
     fi
@@ -1239,7 +1220,7 @@ function sensiopal_db_local_export()
 
     echo "$(tput setaf 6)SENSIOPAL::DB - Export$(tput setaf 7)"
 
-    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "drupal database:dump --file=/var/www/db/local.sql" $shout
+    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:dump --file=/var/www/db/local.sql" $shout
 
 }
 
