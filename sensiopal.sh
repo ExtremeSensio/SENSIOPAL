@@ -1090,22 +1090,13 @@ function sensiopal_build()
         then
             echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal core$(tput setaf 7)"
 
-#            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer create-project drupal-composer/drupal-project:8.x-dev --prefer-dist --no-progress --no-interaction" $shout
-            composer create-project drupal-composer/drupal-project:8.x-dev ./public --prefer-dist --no-progress --no-interaction
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "composer create-project drupal-composer/drupal-project:8.x-dev --prefer-dist --no-progress --no-interaction" $shout
             docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal site:install standard --db-host=db_$PROJECT_ID --db-port=3306 --db-name=db_$PROJECT_ID --db-prefix=$LOCAL_DP_DB_PREFIX --db-user=root --db-pass=root --account-name=$LOCAL_DP_USER --account-pass=$LOCAL_DP_PASS --site-mail=$DEV_EMAIL --site-name=$PROJECT_ID --no-interaction --force" $shout
 
-#            rm public/wp-config-sample.php $shout
-#            rm public/license.txt $shout
-#            rm public/readme.html $shout
-#
-#            rm -rf public/wp-content/plugins/akismet $shout
-#            rm public/wp-content/plugins/hello.php $shout
-#
-#            mkdir -p public/wp-content/themes/blank
-#            echo "<?php" > public/wp-content/themes/blank/index.php
-#            echo "<?php" > public/wp-content/themes/blank/header.php
-#            echo "<?php" > public/wp-content/themes/blank/footer.php
-#            echo "/* Theme Name:  Blank */" > public/wp-content/themes/blank/style.css
+            # TODO: Add code to create a default custom Drupal theme.
+
+#            mkdir -p public/web/themes/blank
+#            echo "<?php" > public/web/themes/blank/index.php
 
             sensiopal_build_wp
             
@@ -1125,12 +1116,12 @@ function sensiopal_build_wp()
         then
             echo "$(tput setaf 6)SENSIOPAL::BUILD - Drupal Plugins$(tput setaf 7)"
 
-#            if [ $DP_PLUGINS == "y" ]
-#                then
-##                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal module:install drush admin_toolbar entity_browser entity_reference_revisions entity_usage field_group linkit paragraphs conditional_fields crop image_widget_crop --composer" $shout
-#            fi
+            if [ $DP_PLUGINS == "y" ]
+                then
+                    docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal module:install drush admin_toolbar entity_browser entity_reference_revisions entity_usage field_group linkit paragraphs conditional_fields crop image_widget_crop --composer" $shout
+            fi
 
-#            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal module:install drush --composer" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal module:install drush --composer" $shout
 
         else 
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No project found$(tput setaf 7)"

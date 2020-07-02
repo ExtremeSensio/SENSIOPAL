@@ -24,6 +24,7 @@ services:
       - ./ssh:/root/.ssh
       - ./npm/package.json:/root/npm/package.json
       - ./npm/gulpfile.js:/root/npm/gulpfile.js
+      - ./curl/.curlrc:/root/.curlrc
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: VAR_LOCAL_DP_USER
