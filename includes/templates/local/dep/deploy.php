@@ -15,21 +15,23 @@ set('writable_use_sudo', false);
 set('writable_mode', 'chmod');
 set('http_user', 'www-data');
 
-set('shared_dirs', ['wp-content/uploads']);
-set('writable_dirs', ['wp-content']);
+set('shared_dirs', ['public/web/sites/default/files']);
+set('writable_dirs', ['public/web/sites']);
 
 set('deploy_path', 'VAR_DIR' );
 
 set('rsync_src', 'public');
 set('rsync_dest','{{release_path}}');
 
-set('rsync_app_src', 'app');
-set('rsync_app_dest','{{release_path}}/wp-content/linotype');
+//set('rsync_app_src', 'app');
+//set('rsync_app_dest','{{release_path}}/wp-content/linotype');
 
 set('rsync',[
     'exclude'      => [
-        'wp-content/uploads/*',
-        '*.log'
+        'public/web/sites/**/files/*',
+        '*.log',
+        'vendor/*',
+        'node_modules/*',
     ],
     'exclude-file' => false,
     'include'      => [],
@@ -188,13 +190,18 @@ task('rsync_app', function() {
     runLocally("rsync -{$config['flags']} --stats --progress -e 'ssh$port $sshArguments' {{rsync_options}}{{rsync_includes}}{{rsync_excludes}}{{rsync_filter}} '$src/' '$user$host:$dst/'", $config);
 });
 
-desc('Overwrite wp-config.php');
+desc('Overwrite settings.local.php');
 task('deploy:update_wp_config', function () {
-    upload( 'local/dp/dp-config.VAR_FILE.php', '{{release_path}}/dp-config.php' );
+    upload( 'local/dp/dp-config.VAR_FILE.php', '{{release_path}}/public/web/sites/default/settings.local.php' );
 });
 
 task('deploy:chown', function () {
     run('chown -R www-data:www-data VAR_DIR');
+});
+
+desc('Install Composer dependencies');
+task('composer_install', function () {
+    run('cd {{release_path}} && composer install --prefer-dist --no-progress --no-ansi --no-interaction && composer dump-autoload');
 });
 
 //Deploy
@@ -213,6 +220,7 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
+    'composer_install'
 ]);
 
 after('deploy', 'success');

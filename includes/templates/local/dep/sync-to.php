@@ -17,7 +17,7 @@ host('VAR_SSH_IP')
     ->set('deploy_path', 'VAR_DIR' );
 
 task('sync:media', function () {
-    upload( 'public/sites/default/files/', 'VAR_DIR/shared/sites/default/files/' );
+    upload( 'public/web/sites/default/files/', 'VAR_DIR/shared/web/sites/default/files/' );
 });
 
 task('sync:db', function () {

@@ -1141,11 +1141,11 @@ function sensiopal_db_local_import()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/local.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
             docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/local.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/local.sql$(tput setaf 7)"
     fi
@@ -1158,11 +1158,11 @@ function sensiopal_db_local_import_staging()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/staging.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
             docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/staging.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/staging.sql$(tput setaf 7)"
     fi
@@ -1175,11 +1175,11 @@ function sensiopal_db_local_import_preproduction()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/preproduction.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
             docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/preproduction.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/preproduction.sql$(tput setaf 7)"
     fi
@@ -1192,11 +1192,11 @@ function sensiopal_db_local_import_production()
     if [ $PROJECT_ID ] && [ -e ~/SENSIOPAL/$PROJECT_ID/local/db/production.sql ]
         then
             echo "$(tput setaf 6)SENSIOPAL::DB - Prepare drupal$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - Importing$(tput setaf 7)"
             docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal database:restore --file=/var/www/db/production.sql" $shout
             echo "$(tput setaf 6)SENSIOPAL::DB - clean new db$(tput setaf 7)"
-            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drupal cache:rebuild" $shout
+            docker-compose -f local/config.yml exec $SENSIOPAL_MACHINE sh -c "vendor/bin/drush cache:rebuild" $shout
         else
             echo "$(tput setaf 1)SENSIOPAL::ERROR - No db to import founded ~/SENSIOPAL/$PROJECT_ID/local/db/production.sql$(tput setaf 7)"
     fi
