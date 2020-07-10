@@ -204,6 +204,11 @@ task('composer_install', function () {
     run('cd {{release_path}} && composer install --prefer-dist --no-progress --no-ansi --no-interaction && composer dump-autoload');
 });
 
+desc('Clear Drupal caches');
+task('clear_cache', function () {
+    run('vendor/bin/drush cache:rebuild');
+});
+
 //Deploy
 task('deploy', [
     'deploy:info',
@@ -220,7 +225,8 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'composer_install'
+    'composer_install',
+    'clear_cache',
 ]);
 
 after('deploy', 'success');

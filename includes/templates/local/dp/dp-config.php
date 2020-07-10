@@ -1,11 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
-}
-
-require_once ABSPATH . 'sites/default/settings.php';
-
 $databases['default']['default'] = array (
     'database' => 'VAR_DB_NAME',
     'username' => 'VAR_DB_USER',
