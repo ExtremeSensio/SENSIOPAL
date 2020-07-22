@@ -15,8 +15,8 @@ set('writable_use_sudo', false);
 set('writable_mode', 'chmod');
 set('http_user', 'www-data');
 
-set('shared_dirs', ['public/web/sites/default/files']);
-set('writable_dirs', ['public/web/sites']);
+set('shared_dirs', ['web/sites/default/files']);
+set('writable_dirs', ['web/sites']);
 
 set('deploy_path', 'VAR_DIR' );
 
@@ -192,7 +192,7 @@ task('rsync_app', function() {
 
 desc('Overwrite settings.local.php');
 task('deploy:update_wp_config', function () {
-    upload( 'local/dp/dp-config.VAR_FILE.php', '{{release_path}}/public/web/sites/default/settings.local.php' );
+    upload( 'local/dp/dp-config.VAR_FILE.php', '{{release_path}}/web/sites/default/settings.local.php' );
 });
 
 task('deploy:chown', function () {
