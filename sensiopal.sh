@@ -1234,7 +1234,7 @@ function sensiopal_sync_to()
                                         dep -f=local/dep/sync-to-staging.php sync -vvv ;;
 
                 preproduction)          sed "s/$LOCAL_DOMAIN/$PREPRODUCTION_DOMAIN/g" local/db/local.sql > local/db/preproduction.dist.sql
-                                        dep -f=local/dep/sync-to-preproduction.php sync -vvv ;;
+                                        dep -f=local/dep/sync-to-preproduction.php sync -vvvv ;;
 
                 production)             sed "s/$LOCAL_DOMAIN/$PRODUCTION_DOMAIN/g" local/db/local.sql > local/db/production.dist.sql
                                         dep -f=local/dep/sync-to-production.php sync -vvv ;;
@@ -1895,6 +1895,7 @@ function sensiopal_create_step__dp_config()
     s/VAR_DB_PREFIX/$STAGING_DB_PREFIX/g
     s/VAR_SALT/fdrstaghdofiudtsregbcgdfrstekgfh/g
     s/VAR_DEBUG/true/g
+    s/VAR_DOMAIN/$STAGING_DOMAIN/g
     " $SCRIPT_PATH/includes/templates/local/dp/dp-config.php > local/dp/dp-config.staging.php
 
     echo "$(tput setaf 6)SENSIOPAL::INIT - Create Drupal preproduction config$(tput setaf 7)"
@@ -1907,6 +1908,7 @@ function sensiopal_create_step__dp_config()
     s/VAR_DB_PREFIX/$PREPRODUCTION_DB_PREFIX/g
     s/VAR_SALT/fdrstaghdofiudtsregbcgdfrstekgfh/g
     s/VAR_DEBUG/false/g
+    s/VAR_DOMAIN/$PREPRODUCTION_DOMAIN/g
     " $SCRIPT_PATH/includes/templates/local/dp/dp-config.php > local/dp/dp-config.preproduction.php
 
     echo "$(tput setaf 6)SENSIOPAL::INIT - Create Drupal production config$(tput setaf 7)"
@@ -1919,6 +1921,7 @@ function sensiopal_create_step__dp_config()
     s/VAR_DB_PREFIX/$PRODUCTION_DB_PREFIX/g
     s/VAR_SALT/fdrstaghdofiudtsregbcgdfrstekgfh/g
     s/VAR_DEBUG/false/g
+    s/VAR_DOMAIN/$PRODUCTION_DOMAIN/g
     " $SCRIPT_PATH/includes/templates/local/dp/dp-config.php > local/dp/dp-config.production.php
 
 }

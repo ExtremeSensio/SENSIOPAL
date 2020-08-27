@@ -9,6 +9,7 @@ host('VAR_SSH_IP')
 
 set('ssh_type', 'native');
 set('use_relative_symlinks', false);
+set('use_atomic_symlink', false);
 set('ssh_multiplexing', true);
 set('allow_anonymous_stats', false);
 set('writable_use_sudo', false);
@@ -198,6 +199,9 @@ task('deploy:update_wp_config', function () {
 task('deploy:chown', function () {
     run('chown -R www-data:www-data VAR_DIR');
 });
+task('deploy:chmod', function () {
+    run('cd {{release_path}} && chmod -R 755 web/themes');
+});
 
 desc('Install Composer dependencies');
 task('composer_install', function () {
@@ -217,16 +221,17 @@ task('deploy', [
     'deploy:lock',
     'deploy:release',
     'rsync',
-    'rsync_app',
+//    'rsync_app',
     'deploy:shared',
     'deploy:update_wp_config',
     'deploy:writable',
     //'deploy:chown',
+    'deploy:chmod',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
     'composer_install',
-    'clear_cache',
+//    'clear_cache',
 ]);
 
 after('deploy', 'success');
