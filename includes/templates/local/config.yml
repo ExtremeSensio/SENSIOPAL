@@ -41,6 +41,8 @@ services:
     volumes:
       - db_VAR_PROJECT_ID:/var/lib/mysql
       - ./../logs/mysql:/var/log/mysql
+    # Set max_allowed_packet to 512M
+    command: --max_allowed_packet=536870912
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: VAR_LOCAL_DP_USER
