@@ -205,7 +205,7 @@ task('deploy:chmod', function () {
 
 desc('Install Composer dependencies');
 task('composer_install', function () {
-    run('cd {{release_path}} && composer install --prefer-dist --no-progress --no-ansi --no-interaction && composer dump-autoload');
+    run('cd {{release_path}} && composer install --prefer-dist --no-progress --no-ansi --no-interaction && composer dump-autoload', ['timeout' => 2000]);
 });
 
 desc('Clear Drupal caches');
